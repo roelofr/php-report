@@ -1,0 +1,22 @@
+{
+    "name": "phpunit-reporter",
+    "main": "./lib/phpunit-reporter",
+    "version": "0.1.0",
+    "description": "Runs PHPUnit tests, displaying results in a nice view",
+    "keywords": [
+        "php",
+        "phpunit",
+        "unit-testing",
+        "ci",
+        "tests"
+    ],
+    "activationCommands": {
+        "atom-workspace": "phpunit-reporter:toggle"
+    },
+    "repository": "https://github.com/roelofr/phpunit-reporter",
+    "license": "MIT",
+    "engines": {
+        "atom": ">=1.0.0 <2.0.0"
+    },
+    "dependencies": {}
+}
