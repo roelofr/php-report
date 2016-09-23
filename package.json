@@ -1,8 +1,8 @@
 {
-  "name": "phpunit-reporter",
-  "main": "./lib/phpunit-reporter",
+  "name": "php-report",
+  "main": "./lib/php-report",
   "version": "0.1.0",
-  "description": "Runs PHPUnit tests, displaying results in a nice view",
+  "description": "Runs PHPUnit tests, displaying results in a nice report-like structure",
   "keywords": [
     "php",
     "phpunit",
@@ -11,9 +11,9 @@
     "tests"
   ],
   "activationCommands": {
-    "atom-workspace": "phpunit-reporter:toggle"
+    "atom-workspace": "php-report:toggle"
   },
-  "repository": "https://github.com/roelofr/phpunit-reporter",
+  "repository": "https://github.com/roelofr/php-report",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
