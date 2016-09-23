@@ -1,3 +1,7 @@
+###
+Checks the plugin, note that this test is left as-is since the plugin was
+created and therefore does not represent features the plugin /should// have.
+###
 PhpunitReporter = require '../lib/phpunit-reporter'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.

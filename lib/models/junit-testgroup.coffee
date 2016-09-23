@@ -1,7 +1,9 @@
-#
-# TestCase
-# Contains values of a test case. May be part of a TestSuite
-#
+###
+TestCase
+Contains values of a test case. May be part of a TestSuite
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 
 JUnitNode = require './junit-node'
 TestCase = require './junit-testcase'

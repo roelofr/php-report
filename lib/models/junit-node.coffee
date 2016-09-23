@@ -1,8 +1,10 @@
-#
-# JUnit node
-# Contains values of a JUnit test node, which is either a test case or a test
-# suite
-#
+###
+JUnit node
+Contains values of a JUnit test node, which is either a test case or a test
+suite
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 
 module.exports =
 class JunitNode

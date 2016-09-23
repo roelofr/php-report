@@ -1,8 +1,8 @@
-#
-# Reads PHPUnit config to derrive the name
-# @author https://github.com/roelofr
-# @license MIT
-#
+###
+Reads PHPUnit config to derrive the name
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 
 ParserXml = require './parser-xml'
 

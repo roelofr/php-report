@@ -1,9 +1,13 @@
-#
-# Derrived from phpunit atom package
-# @author https://github.com/alairock
-# @link https://github.com/alairock/phpunit-atom/blob/master/lib/phpunit.coffee
-# @license MIT
-#
+###
+Derrived from the 'phpunit' atom package
+
+I took some leads from https://github.com/alairock/phpunit-atom/blob/master/lib/phpunit.coffee,
+but after I wrapped my head around the code, I just wrote it myself. The
+previous header no longer applies, but I'm still putting in a thank-you for
+Skyler Lewis <https://github.com/alairock>.
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 fs = require 'fs'
 tmp = require 'tmp'
 

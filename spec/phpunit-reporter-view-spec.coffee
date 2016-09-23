@@ -1,3 +1,6 @@
+###
+Checks how life's doing, which is out of scope, I guess....?
+###
 PhpunitReporterView = require '../lib/phpunit-reporter-view'
 
 describe "PhpunitReporterView", ->

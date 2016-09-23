@@ -1,8 +1,9 @@
-#
-# Reads PHPUnit config to derrive the name
-# @author https://github.com/roelofr
-# @license MIT
-#
+###
+Reads JUnit XML output to get the tests that were run and get pass / fail /
+error scores.
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 
 ParserXml = require './parser-xml'
 

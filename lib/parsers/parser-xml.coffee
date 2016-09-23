@@ -1,8 +1,10 @@
-#
-# Reads PHPUnit config to derrive the name
-# @author https://github.com/roelofr
-# @license MIT
-#
+###
+Handles parsing XML files. Uses LibXMLjs for this, since it's written in C and
+therefore significantly faster than a pure-js implementation (and there is more
+strict type binding and more sugar and spice)
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 fs = require 'fs'
 tmp = require 'tmp'
 libxmljs = require 'libxmljs'

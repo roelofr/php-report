@@ -1,3 +1,11 @@
+###
+PHPUnit Reporter
+Main class, called by Atom
+
+Although one should wonder if this isn't too much logic for an initiator...
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 PhpunitReporterView = require './phpunit-reporter-view'
 ParserPhpunit = require './parsers/parser-phpunit'
 ParserJunit = require './parsers/parser-junit'

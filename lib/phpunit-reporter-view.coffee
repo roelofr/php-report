@@ -1,3 +1,9 @@
+###
+PHPUnit Reporter view
+Main view for the plugin
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 {View} = require 'atom-space-pen-views'
 
 module.exports =

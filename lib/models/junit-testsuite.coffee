@@ -1,6 +1,8 @@
-#
-# Contains a testsuite, which contains testCases
-#
+###
+Contains a testsuite, which contains testCases
+
+@author Roelof Roos (https://github.com/roelofr)
+###
 
 JUnitNode = require './junit-node'
 TestCase = require './junit-testcase'
