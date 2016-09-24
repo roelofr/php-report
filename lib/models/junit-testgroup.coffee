@@ -20,9 +20,9 @@ class TestGroup extends JUnitNode
         groupNodes = []
 
         for testNode in node.childNodes()
-            if testNode.name() == 'testcase' then
+            if testNode.name() == 'testcase'
                 groupNodes.push(new TestCase(testNode))
-            else if testNode.name() == 'testsuite' then
+            else if testNode.name() == 'testsuite'
                 groupNodes.push(new TestSuite(testNode))
 
         @testNodes = groupNodes

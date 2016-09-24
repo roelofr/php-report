@@ -1,0 +1,21 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+menu: [
+    label: 'Packages'
+    submenu: [
+        label: 'PHP Report'
+        submenu: [
+            {
+                command: 'php-report:toggle'
+                label: 'Toggle panel'
+            }
+            {
+                command: 'php-report:start'
+                label: 'Start a new test'
+            }
+            {
+                command: 'php-report:stop'
+                label: 'Abort test'
+            }
+        ]
+    ]
+]

@@ -1,6 +1,6 @@
 ###
-PHPUnit Reporter view
-Main view for the plugin
+PHP Report result-entry
+A model for a single result entry, which is a View element
 
 @author Roelof Roos (https://github.com/roelofr)
 ###
@@ -8,7 +8,7 @@ Main view for the plugin
 
 module.exports =
 
-class PhpunitReporterView extends View
+class EntryView extends View
     # Internal: Build up the HTML contents for the fragment.
     commands: {
         run: null
