@@ -1,0 +1,47 @@
+//
+// Main components
+//
+.php-report-hideable {
+    &--hidden {
+        display: none;
+    }
+}
+
+.php-report {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: stretch;
+    align-items: stretch;
+
+    &__header {
+        order: 1;
+    }
+
+    &__actions {
+        order: 2;
+    }
+
+    &__progress {
+        order: 3;
+    }
+
+    &__results {
+        &:extend(.php-report-hideable all);
+
+        order: 4;
+        flex-grow: 1;
+    }
+
+    &__idle {
+        &:extend(.php-report-hideable all);
+
+        order: 5;
+        flex-grow: 1;
+    }
+
+    &__terminal {
+        &:extend(.php-report-hideable all);
+
+        order: 6;
+    }
+}

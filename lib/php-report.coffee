@@ -21,6 +21,8 @@ activeView = null
 
 module.exports = phpReport =
 
+    hookLinks: {}
+
     activate: (state) ->
         console.log 'PHP Report: activate'
 
@@ -34,12 +36,9 @@ module.exports = phpReport =
         console.log 'PHP Report: toggle'
 
         unless activeView and activeView.active
-            activeView = new PhpReportView
-            activeView.setCommand('run', => @runnerStart())
-            activeView.setCommand('kill', => @runnerStop())
-            activeView.setCommand('close', => @toggleView())
+            activeView = new PhpReportView this
 
-            commandRunner = new Runner(activeView)
+            commandRunner = new Runner this
             commandRunner.setComplete(=> @testComplete())
 
             activePane = atom.workspace.getActivePane()
@@ -47,7 +46,7 @@ module.exports = phpReport =
             activePane.activateItem(newItem)
 
             # Reset interface
-            activeView.header.clear()
+            activeView.clear()
 
             # Read content of interface
             @readConfig()
@@ -63,9 +62,10 @@ module.exports = phpReport =
 
             activeView = null
 
-    setTitle: (title) ->
+    setTitle: (title, subtitle) ->
         if activeView and activeView.active
-            activeView.header.setTitle(title)
+            activeView.elem_header.setTitle(title)
+            activeView.elem_header.setSubtitle(subtitle)
 
     readConfig: ->
         console.log 'PHP Report: readConfig'
@@ -83,9 +83,19 @@ module.exports = phpReport =
             return false
 
         parser = new ParserPhpunit
-        parser.getSuiteName (name) =>
-            if name != null
-                @setTitle name
+        parser.getSuiteNames (names) =>
+            if names == null
+                @setTitle 'No test suites loaded', ''
+                return
+
+            if activeView.elem_idle then activeView.elem_idle.setAvailability true
+
+            if names.length == 1
+                @setTitle names.pop(), ''
+            else if names.length == 2
+                @setTitle names.shift(), 'and ' + names.shift()
+            else
+                @setTitle names.shift(), 'and ' + names.length + ' other test suites.'
 
     deactivate: ->
         console.log 'PHP Report: deactivate'
@@ -94,11 +104,11 @@ module.exports = phpReport =
     runnerStart: ->
         unless activeView and activeView.active
             @toggleView
-        return if commandRunner
+        return unless commandRunner
         commandRunner.start()
 
     runnerStop: ->
-        return if commandRunner
+        return unless commandRunner
         commandRunner.stop()
 
     testComplete: ->
@@ -114,3 +124,55 @@ module.exports = phpReport =
         parser.getTestGroups (groups) =>
             console.log "Reading stuff finished!"
             console.log "Resulting groups:", groups
+
+    # Do we really need to write our own hook system?
+    ###
+    Adds an event listener to the hook specified
+
+    @param {String} name Hook to bind to
+    @param {Function} action Action to perform
+    ###
+    on: (name, action) ->
+        console.log 'Debug on!', typeof action, typeof name
+
+        if typeof name != 'string' then return
+        if typeof action != 'function' then return
+
+        if not @hookLinks[name] then @hookLinks[name] = []
+        @hookLinks[name].push(action)
+
+    ###
+    Removes an action from the event listener, or removes all actions from an
+    event.
+
+    @param {String} name Hook name
+    @param {Function|null} action Action to remove, or null to remove all
+    ###
+    off: (name, action = null) ->
+        if typeof name != 'string' then return
+        if typeof action != 'function' and action != null then return
+
+        if action == null
+            @hookLinks[name] = []
+        else
+            newLinks = []
+            for hook in @hookLinks[name]
+                if hook != action then newLinks.push(action)
+
+            @hookLinks[name] = newLinks
+
+    ###
+    Triggers a hook, won't throw an error if nothing is bound to it.
+
+    @param {String} hook Hook to call
+    @param {Object} data Extra data to send
+    ###
+    trigger: (hook, data = {}) ->
+        console.log "Trigger #{hook} with #{data}."
+        if not @hookLinks[hook] then return
+        if @hookLinks[hook].length == 0 then return
+
+        event = new CustomEvent hook, detail: data, cancelable: true
+        for action in @hookLinks[hook]
+            if event.defaultPrevented then break
+            action event

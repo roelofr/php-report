@@ -6,35 +6,32 @@ Main view for the plugin
 ###
 {View} = require 'atom-space-pen-views'
 HeaderView = require './views/header-view'
+ActionView = require './views/action-view'
+Progressbar = require './views/progressbar'
+ResultView = require './views/result-view'
+IdleView = require './views/idle-view'
+Terminal = require './views/terminal'
 
 module.exports =
 
 class PhpReportView extends View
-    # Internal: Build up the HTML contents for the fragment.
-    commands: {
-        run: null
-        kill: null
-        close: null
-    }
 
-    @content: ->
+    @content: (phpReport) ->
         @div class: 'php-report', outlet: 'container', =>
-            @subview 'header', new HeaderView
-            @div class: 'php-report__actions', =>
-                @button click: 'close', class: 'btn btn-default pull-right', =>
-                    @span class: 'icon icon-arrow-down'
-                @button click: 'clear', class: 'btn btn-default pull-right', =>
-                    @span class: 'icon icon-trashcan'
-                @button click: 'run', class: 'btn btn-default pull-right', outlet: 'buttonRun', =>
-                    @span class: 'icon icon-playback-play'
-                @button click: 'kill', class: 'btn btn-default pull-right', outlet: 'buttonKill', enabled: false, =>
-                    @span class: 'icon icon-stop'
-                @button click: 'copy', class: 'btn btn-default pull-right', =>
-                    @span class: 'icon icon-clippy'
-            @div class: 'phpunit-contents', outlet: 'output', style: 'font-family: monospace'
+            @subview 'elem_header', new HeaderView phpReport
+            @subview 'elem_action', new ActionView phpReport
 
-    initialize: ->
+            @subview 'elem_progress', new Progressbar phpReport
+
+            @subview 'elem_result', new ResultView phpReport
+            @subview 'elem_idle', new IdleView
+
+            @subview 'elem_term', new Terminal phpReport
+
+    phpReport: null
+    initialize: (phpReport) ->
         console.log 'PhpReportView: initialize'
+        @phpReport = phpReport
         @active = true
         return
 
@@ -47,7 +44,11 @@ class PhpReportView extends View
         return 'PHP Report'
 
     clear: ->
-        @output.html ""
+        @elem_term.clear()
+        @elem_progress.hide()
+        @elem_result.hide()
+        @elem_idle.show()
+        @elem_header.clear()
 
     setCommand: (command, action) ->
         @commands[command] = action
@@ -64,15 +65,5 @@ class PhpReportView extends View
         if @commands.close
             @commands.close()
 
-    copy: ->
-        atom.clipboard.write @output.text()
-
     append: (data, parse = true) ->
-        breakTag = "<br>"
-        data = data + ""
-        if parse
-            data = data.replace /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + breakTag + "$2"
-            data = data.replace /\son line\s(\d+)/g, ":$1"
-            data = data.replace /((([A-Z]\\:)?([\\/]+(\w|-|_|\.)+)+(\.(\w|-|_)+)+(:\d+)?))/g, "<a>$1</a>"
-
-        @output.append data
+        @elem_term.append data

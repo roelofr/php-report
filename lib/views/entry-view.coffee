@@ -18,16 +18,15 @@ class EntryView extends View
 
     @content: ->
         @div class: 'phpunit-container', outlet: 'container', =>
-            @button click: 'close', class: 'btn btn-default pull-right', =>
-                @span class: 'icon icon-arrow-down'
             @button click: 'clear', class: 'btn btn-default pull-right', =>
                 @span class: 'icon icon-trashcan'
+                @span "Dismiss"
             @button click: 'run', class: 'btn btn-default pull-right', outlet: 'buttonRun', =>
                 @span class: 'icon icon-playback-play'
+                @span "Restart"
             @button click: 'kill', class: 'btn btn-default pull-right', outlet: 'buttonKill', enabled: false, =>
                 @span class: 'icon icon-stop'
-            @button click: 'copy', class: 'btn btn-default pull-right', =>
-                @span class: 'icon icon-clippy'
+                @span "Abort"
             @div class: 'phpunit-contents', outlet: 'output', style: 'font-family: monospace'
 
     clear: ->

@@ -73,11 +73,12 @@ class ParserPhpunit
         return true
 
     ###
-    Async method to get the name of the test suite(s)
+    Reads the suite names from the PHPUnit config
 
-    @param {Function} callback `callback(names)`
+    @param {Function} callback after read has completed
+    @return array List of suite names. Null on error
     ###
-    getSuiteName: (callback) ->
+    getSuiteNames: (callback) ->
         return if typeof callback != 'function'
         if @configFile == null
             console.warn 'ConfigFile is null!'
@@ -96,13 +97,26 @@ class ParserPhpunit
                     console.log "Read #{suite.attr('name').value()}"
                     names.push(suite.attr('name').value())
 
+            callback(names)
+
+        # Read, report if the _read method returns false
+        unless @_read readCallback
+            callback(null)
+
+    ###
+    Async method to get the name of the test suite(s)
+
+    @param {Function} callback `callback(names)`
+    @return {String}
+    ###
+    getSuiteName: (callback) ->
+        @getSuiteNames (names) =>
+            if names == null
+                return callback(null)
+
             if names.length > 1
                 last2 = names.pop()
                 last1 = names.pop()
                 names.push("#{last1} and #{last2}")
 
             return callback(names.join(', '))
-
-        # Read, report if the _read method returns false
-        unless @_read readCallback
-            callback(null)

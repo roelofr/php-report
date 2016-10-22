@@ -15,7 +15,7 @@ module.exports =
 class PhpunitRunner
 
     phpunit: null
-    terminal: null
+    phpReport: null
 
     events:
         start: null
@@ -26,8 +26,8 @@ class PhpunitRunner
         result: null,
         coverage: null
 
-    constructor: (terminal) ->
-        @terminal = terminal
+    constructor: (phpReport) ->
+        @phpReport = phpReport
 
     getResultFile: ->
         return if @files.result != null then @files.result else null
@@ -60,8 +60,11 @@ class PhpunitRunner
         @files.coverage = null
 
     start: ->
+        console.log 'Start issued'
         # One instance at a times
         if @phpunit and @phpunit.pid then return
+
+        console.log 'Actually starting now'
 
         # Get temp files
         tempFiles = {
@@ -73,8 +76,7 @@ class PhpunitRunner
         console.log "Using #{tempFiles.coverage} as coverage file"
 
         # Switch buttons on terminal
-        @terminal.buttonKill.enable()
-        @terminal.buttonRun.disable()
+        @phpReport.trigger 'phpunit:start'
 
         if @events.start != null
             try @events.start()
@@ -94,47 +96,29 @@ class PhpunitRunner
         @phpunit = spawn exec, params, options
 
         @phpunit.stdout.on 'data', (data) =>
-            @terminal.append data
+            @phpReport.trigger 'phpunit:log', data
 
         @phpunit.stderr.on 'data', (data) =>
-            @terminal.append '<br><b>Runtime error</b><br><br>'
-            @terminal.append data
+            message = "<br><br><strong>Runtime error</strong><br><br>#{data}"
+            @phpReport.trigger 'phpunit:log', message
 
         @phpunit.on 'close', (code, signal) =>
             if signal
                 log = "Process killed with signal #{signal}"
             else
                 log = 'Complete.'
-            @terminal.append "<br>#{log}<br><hr>", false
+            @phpReport.trigger 'phpunit:log', "<br>#{log}<br><hr />"
 
             # Assign new files
             @files.result = tempFiles.result
             @files.coverage = tempFiles.coverage
 
             # Switch buttons again
-            @terminal.buttonKill.disable()
-            @terminal.buttonRun.enable()
-
-            if signal and @events.cancelled != null
-                try
-                    @events.cancelled()
-                catch ex
-                    console.warn 'Error when handling cancelled event', ex
-            else if signal
-                console.warn 'Got no event for cancelled'
-
-            if !signal and @events.complete != null
-                try
-                    @events.complete()
-                catch ex
-                    console.warn 'Error when handling complete event', ex
-            else if !signal
-                console.warn 'Got no event for complete'
-
+            @phpReport.trigger 'phpunit:stop', exitcode: signal
 
     stop: ->
         if @phpunit.pid == null
             return
 
-        @terminal.append 'Killing current PHPUnit execution...<br>'
+        @phpReport.trigger 'phpunit:log', 'Killing process...<br />'
         @phpunit.kill 'SIGHUP'

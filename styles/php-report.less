@@ -3,64 +3,12 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
+@import "php-report/variables";
 
-// Main components
-.php-report {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: stretch;
-    align-items: stretch;
-}
-
-.php-report__actions {
-    background-color: rgba(100, 100, 100, 0.6);
-    padding: 1rem 2rem;
-
-    .btn {
-        padding: 1rem;
-        margin: 0 0.25rem;
-    }
-}
-
-// App header
-.php-report-header {
-    display: flex;
-    flex-flow: row nowrap;
-    padding: 2rem;
-}
-
-.php-report-cell {
-    flex-basis: 25px;
-    flex-grow: 1;
-
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-
-    padding: 0.1rem 0.2rem;
-}
-
-.php-report-cell--main {
-    flex-shrink: 1;
-    flex-basis: 100%;
-    align-items: flex-start;
-}
-
-.php-report-counter {
-    font-size: 2.3rem;
-    font-color: #fff;
-}
-
-// Application log
-.php-cli-container {
-    color: white;
-    max-height: 250px;
-    overflow: scroll;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-}
-
-.php-cli-container a {
-    color: #F9EE98;
-    text-decoration: underline;
-}
+@import "php-report/main";
+@import 'php-report/header';
+@import 'php-report/actions';
+@import 'php-report/progress';
+@import 'php-report/results';
+@import 'php-report/idle';
+@import 'php-report/terminal';

@@ -1,0 +1,95 @@
+//
+// Header element
+//
+
+.php-report__header {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 2rem;
+
+    &-brand {
+        display: flex;
+        flex: 1 1 60%;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+
+        padding: .1rem .2rem;
+
+        &-title {
+            font-size: 2.5rem;
+            color: @text-color-highlight;
+        }
+
+        &-subtitle {
+            color: @text-color;
+        }
+    }
+
+    &-stats {
+        display: flex;
+        flex: 1 0 40%;
+        flex-flow: row nowrap;
+        align-items: center;
+
+        padding: .1rem .2rem;
+    }
+
+    &-stat {
+        flex: 0 0 25%;
+    }
+}
+
+.php-report-stat {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    padding-left: .2rem;
+
+    &__score {
+        order: 1;
+        font-size: 2.3rem;
+        font-color: @text-color-highlight;
+    }
+
+    &__label-container {
+        order: 2;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+    }
+
+    &__icon {
+        order: 1;
+
+        &::before {
+            margin-right: @php-report-icon-change-size * .25;
+            font-size: @php-report-icon-change-size;
+            width: @php-report-icon-change-size;
+            height: @php-report-icon-change-size;
+        }
+
+        &--hidden {
+            visibility: hidden;
+        }
+
+        &.icon-arrow-up,
+        &.icon-triangle-up {
+            color: @php-report-color-change-up;
+        }
+
+        &.icon-primitive-square {
+            color: @php-report-color-change-same;
+        }
+
+        &.icon-arrow-down,
+        &.icon-triangle-down {
+            color: @php-report-color-change-down;
+        }
+    }
+
+    &__label {
+        order: 2;
+        font-size: .95rem;
+    }
+}
