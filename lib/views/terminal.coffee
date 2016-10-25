@@ -12,22 +12,26 @@ module.exports =
 class Terminal extends HideableView
     @content: ->
         @div class: 'php-report__terminal', =>
-            @pre class: 'php-report__terminal-inner', outlet: 'term'
+            @div class: 'inset-panel', =>
+                @div class: 'panel-heading', outlet: 'header', 'Console output'
+                @div class: 'panel-body php-report__terminal-panel', outlet: 'panel', =>
+                    @pre class: 'php-report__terminal-inner', outlet: 'terminal'
 
     termContainer: null
 
     initialize: (phpReport) ->
-        @termContainer = @term.parent()
-        phpReport.on 'phpunit:log', (event) => @append event.detail
+        phpReport.on 'phpunit:log', (_, line) => @append line
+        phpReport.on 'phpunit:clean', => @clear()
+
+        @panel.addClass('hidden')
+        @header.on 'click', => @panel.toggleClass('hidden')
 
     clear: ->
-        @term.text ''
-        @termContainer.scrollTop 0
+        @terminal.text ''
+        @panel.scrollTop 0
 
     append: (text) ->
         text = String(text).replace /(\r\n|\n\r|\r|\n)/g, '<br />$1'
-        # Append text
-        @term.append text
-
-        # Scroll to end
-        @termContainer.scrollTop @termContainer.get(0).scrollHeight;
+        # Append text and scroll to end
+        @terminal.append text
+        @terminal.scrollTop @terminal.get(0).scrollHeight;

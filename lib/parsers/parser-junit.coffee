@@ -1,32 +1,38 @@
 ###
-Reads JUnit XML output to get the tests that were run and get pass / fail /
-error scores.
+Reads PHPUnit test results to determine the coverage percentage.
 
 @author Roelof Roos (https://github.com/roelofr)
 ###
 
 path = require 'path'
 fs = require 'fs'
-libxmljs = require 'libxmljs'
-
-TestCase = require '../models/junit-testcase'
-TestSuite = require '../models/junit-testsuite'
-TestGroup = require '../models/junit-testgroup'
+ParserBase = require './parser-base'
 
 module.exports =
-class ParserJunit
+class ParserJunit extends ParserBase
 
-    dataFile: null
-    dataContent: null
+    resultFile: null
+    resultData: null
 
     constructor: (file) ->
         if typeof file != 'string'
-            throw new TypeError("Expected file to be a string, not a #{typeof file}")
+            console.warn 'Tried to use non-string as file!', file
+            return
 
+        # Always make sure the file exists and is a file!
         try
-            fileStat = fs.statSync(file)
-            if fileStat and filestat.isFile()
-                @dataFile = file
+            fileStat = fs.statSync file
+
+            # Log non-files to the console
+            if fileStat and fileStat.isFile()
+                @resultFile = file
+            else
+                console.warn "Tried to use non-existent or non-file #{file}!"
+
+        catch err
+            # Log errors!
+            console.warn "Failed to read file #{file}: ", err
+            return
 
     ###
     Reads the config file if it hasn't been done already.
@@ -35,47 +41,50 @@ class ParserJunit
     @return {Boolean} true if reading, false if reading isn't possible
     @visibility private
     ###
-    _read: (callback) ->
+    read: (callback) ->
         if typeof callback != 'function' then return false
-        if @configFile == null then return false
+        if @resultFile == null then return false
 
-        if @configContent != null
-            callback(null, @configContent)
+        if @resultData != null
+            callback null, @resultData
             return true
 
-        fs.readFile @configFile, 'utf8', (err, data) =>
+        super @resultFile, (err, data) =>
             if err
-                callback(err, null)
+                callback err, null
             else
-                @configContent = data
-                @configData = libxmljs.parseXml(data)
-                callback(null, @configData)
-
-        return true
+                @resultData = data
+                callback null, @resultData
 
     ###
-    Async method to get the result from a JUnit result file
+    Reads the test results and returns a test coverage percentage
 
-    @param {Function} callback `callback(data)` Returns TestGroup models
+    @param {Function} callback after read has completed, gets an array
+    @return array List of suite names. Null on error
     ###
-    getTestGroups: (callback) ->
-        return if typeof callback != 'function'
-        if @configFile == null
-            callback(null)
-            return
+    getStatistics: (callback) ->
+        if typeof callback != 'function' then return false
 
-        readCallback = (ok, data) =>
-            if !ok
-                console.warn "Failed to read data!"
-                return callback(null)
+        @read (err, data) =>
+            if err != null
+                console.warn "Failed to read data:", err
+                return callback null
 
-            groups = []
-            suites = data.root().childNodes();
+            tests = 0
+            errors = 0
+            failures = 0
 
-            console.log 'Read finished!', suites
+            # Find all tests
+            for metric in data.find '//testsuite'
+                if metric.attr('tests')?
+                    tests += Number metric.attr('tests').value()
+                if metric.attr('failures')?
+                    errors += Number metric.attr('errors').value()
+                if metric.attr('errors')?
+                    failures += Number metric.attr('failures').value()
 
-            # Get all suites that are supposed to run
-            for suite in suites
-                groups.push new TestGroup(suite)
-
-            return callback(groups)
+            callback {
+                tests: tests,
+                errors: errors,
+                failures: failures
+            }

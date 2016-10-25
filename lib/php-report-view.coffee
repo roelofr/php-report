@@ -24,19 +24,17 @@ class PhpReportView extends View
             @subview 'elem_progress', new Progressbar phpReport
 
             @subview 'elem_result', new ResultView phpReport
-            @subview 'elem_idle', new IdleView
+            @subview 'elem_idle', new IdleView phpReport
 
             @subview 'elem_term', new Terminal phpReport
 
     phpReport: null
     initialize: (phpReport) ->
-        console.log 'PhpReportView: initialize'
         @phpReport = phpReport
         @active = true
         return
 
     destroy: ->
-        console.log 'PhpReportView: destroy'
         @active = false
         return
 

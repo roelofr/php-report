@@ -39,9 +39,15 @@ class IdleView extends HideableView
                         @p unavailableBody[1]
                         @p unavailableBody[2]
 
-    initialize: ->
-        @setAvailability false
+    initialize: (phpReport) ->
+        # Hide both elements by default
+        @unavailable.addClass 'hidden'
+        @standby.addClass 'hidden'
+
         @unavailable.find('.panel-body').html(unavailableBody)
+
+        phpReport.on 'config-update', (event, data) =>
+            @setAvailability data.available
 
     hide: ->
         @addClass 'hidden'

@@ -6,10 +6,10 @@ Reads PHPUnit config to derrive the name
 
 path = require 'path'
 fs = require 'fs'
-libxmljs = require 'libxmljs'
+ParserBase = require './parser-base'
 
 module.exports =
-class ParserPhpunit
+class ParserPhpunit extends ParserBase
 
     configFile: null
     configContent: null
@@ -52,25 +52,20 @@ class ParserPhpunit
     @return {Boolean} true if reading, false if reading isn't possible
     @visibility private
     ###
-    _read: (callback) ->
+    read: (callback) ->
         if typeof callback != 'function' then return false
         if @configFile == null then return false
 
         if @configContent != null
-            callback(null, @configContent)
+            callback null, @configContent
             return true
 
-        fs.readFile @configFile, 'utf8', (err, data) =>
+        super @configFile, (err, data) =>
             if err
-                console.error "Reading #{@configFile}: ", err
-                callback(err, null)
+                callback err, null
             else
                 @configContent = data
-                @configData = libxmljs.parseXml(data)
-                console.log 'Received data: ', data, @configData
-                callback(null, @configData)
-
-        return true
+                callback null, @configContent
 
     ###
     Reads the suite names from the PHPUnit config
@@ -99,8 +94,8 @@ class ParserPhpunit
 
             callback(names)
 
-        # Read, report if the _read method returns false
-        unless @_read readCallback
+        # Read, report if the read method returns false
+        unless @read readCallback
             callback(null)
 
     ###

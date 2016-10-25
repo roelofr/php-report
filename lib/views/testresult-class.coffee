@@ -4,20 +4,23 @@ A model for a single result entry, which is a View element
 
 @author Roelof Roos (https://github.com/roelofr)
 ###
-{View} = require 'atom-space-pen-views'
+{View} = require 'space-pen'
 
 module.exports =
 
-class EntryView extends View
-    # Internal: Build up the HTML contents for the fragment.
-    commands: {
-        run: null
-        kill: null
-        close: null
-    }
-
+class TestResultSingle extends View
     @content: ->
-        @div class: 'phpunit-container', outlet: 'container', =>
+        @div class: 'php-report-result', outlet: 'container', =>
+            @div class: 'php-report-result__header php-report-result-header', outlet: 'header' =>
+                @div class: 'php-report-result-header__icon', outlet: 'icon'
+                @div class: 'php-report-result-header__title', =>
+                    @h4 outlet: 'title', =>
+                        @span()
+                    @span class: 'php-report-result-header__title-class', outlet: 'header_class'
+                    @span class: 'php-report-result-header__title-test', outlet: 'header_test'
+                @div class: 'php-report-result-header__stats', =>
+                    @div class: 'php-report-result-header__stat', =>
+                        @
             @button click: 'clear', class: 'btn btn-default pull-right', =>
                 @span class: 'icon icon-trashcan'
                 @span "Dismiss"

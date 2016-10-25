@@ -5,7 +5,7 @@ A rather simple hideable view
 @author Roelof Roos (https://github.com/roelofr)
 ###
 
-{View} = require 'atom-space-pen-views'
+{View} = require 'space-pen'
 
 module.exports =
 class HideableView extends View

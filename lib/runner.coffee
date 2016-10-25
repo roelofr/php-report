@@ -60,11 +60,10 @@ class PhpunitRunner
         @files.coverage = null
 
     start: ->
-        console.log 'Start issued'
         # One instance at a times
-        if @phpunit and @phpunit.pid then return
-
-        console.log 'Actually starting now'
+        if @phpunit and @phpunit.pid and @phpunit.connected
+            console.warn "Process is still running as", @phpunit.pid
+            return
 
         # Get temp files
         tempFiles = {
@@ -88,10 +87,8 @@ class PhpunitRunner
         exec = 'phpunit' # TODO replace this with something configurable
         params = [
             "--log-junit=#{tempFiles.result}",
-            "--coverage-xml=#{tempFiles.coverage}",
+            "--coverage-clover=#{tempFiles.coverage}",
         ]
-
-        console.log "> #{exec} #{params.join(' ')}"
 
         @phpunit = spawn exec, params, options
 
@@ -103,12 +100,6 @@ class PhpunitRunner
             @phpReport.trigger 'phpunit:log', message
 
         @phpunit.on 'close', (code, signal) =>
-            if signal
-                log = "Process killed with signal #{signal}"
-            else
-                log = 'Complete.'
-            @phpReport.trigger 'phpunit:log', "<br>#{log}<br><hr />"
-
             # Assign new files
             @files.result = tempFiles.result
             @files.coverage = tempFiles.coverage
@@ -120,5 +111,5 @@ class PhpunitRunner
         if @phpunit.pid == null
             return
 
-        @phpReport.trigger 'phpunit:log', 'Killing process...<br />'
-        @phpunit.kill 'SIGHUP'
+        @phpReport.trigger 'phpunit:log', '<span class="text-error icon icon-circle-slash"></span>'
+        @phpunit.kill 'SIGTERM'

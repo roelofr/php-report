@@ -6,70 +6,81 @@ Although one should wonder if this isn't too much logic for an initiator...
 
 @author Roelof Roos (https://github.com/roelofr)
 ###
+
+# Required project dependancies
 PhpReportView = require './php-report-view'
 ParserPhpunit = require './parsers/parser-phpunit'
 ParserJunit = require './parsers/parser-junit'
+ParserClover = require './parsers/parser-clover'
 Runner = require './runner'
 
+# Required Atom dependancies
 {CompositeDisposable} = require 'atom'
 path = require 'path'
 fs = require 'fs'
 
+# Constants
 PHP_REPORT_URI = 'php-report://report'
-commandRunner = null
-activeView = null
+CMD_TOGGLE = 'php-report:toggle'
+
+hooks = {}
+runner = null
+view = null
 
 module.exports = phpReport =
 
-    hookLinks: {}
-
     activate: (state) ->
-        console.log 'PHP Report: activate'
-
         # Register command that toggles this view
-        atom.commands.add 'atom-workspace',
-            'php-report:toggle': => @toggleView()
-            'php-report:start': => @runnerStart()
-            'php-report:stop': => @runnerStop()
+        atom.commands.add 'atom-workspace', CMD_TOGGLE, => @toggleView()
+
+        # Register atom hooks
+        atom.project.onDidChangePaths => @readConfig()
+
+        # Create a PHPUnit runner
+        runner = new Runner this
+
+        # Bind hooks
+        @on 'phpunit:stop', => @testComplete()
+
+        # Return nothing
+        return
+
+    deactivate: ->
+        # Release all hooks
+        for hook, _ of hooks
+            @off hook
+
+        # Destroy runner
+        runner.stop()
+        runner = null
+
+        # Return nothing
+        return
 
     toggleView: ->
-        console.log 'PHP Report: toggle'
+        unless view and view.active
+            view = new PhpReportView this
+            pane = atom.workspace.getActivePane()
+            item = pane.addItem view, 0
 
-        unless activeView and activeView.active
-            activeView = new PhpReportView this
+            pane.activateItem item
 
-            commandRunner = new Runner this
-            commandRunner.setComplete(=> @testComplete())
-
-            activePane = atom.workspace.getActivePane()
-            newItem = activePane.addItem activeView
-            activePane.activateItem(newItem)
-
-            # Reset interface
-            activeView.clear()
-
-            # Read content of interface
+            view.clear()
             @readConfig()
         else
-            # Always cancel the runner
-            commandRunner.stop()
-            commandRunner = null
-
-            containingPane = atom.workspace.panelForItem(activeView)
+            containingPane = atom.workspace.panelForItem(view)
 
             if containingPane
-                containingPane.destroyItem(activeView)
+                containingPane.destroyItem view
 
-            activeView = null
+            view = null
 
     setTitle: (title, subtitle) ->
-        if activeView and activeView.active
-            activeView.elem_header.setTitle(title)
-            activeView.elem_header.setSubtitle(subtitle)
+        if view and view.active
+            view.elem_header.setTitle(title)
+            view.elem_header.setSubtitle(subtitle)
 
     readConfig: ->
-        console.log 'PHP Report: readConfig'
-
         root = atom.project.getPaths()
         if root.length == 0
             console.warn "Cannot find root"
@@ -88,44 +99,50 @@ module.exports = phpReport =
                 @setTitle 'No test suites loaded', ''
                 return
 
-            if activeView.elem_idle then activeView.elem_idle.setAvailability true
+            data =
+                main: null,
+                side: null,
+                list: names,
+                available: false
 
-            if names.length == 1
-                @setTitle names.pop(), ''
-            else if names.length == 2
-                @setTitle names.shift(), 'and ' + names.shift()
-            else
-                @setTitle names.shift(), 'and ' + names.length + ' other test suites.'
+            if names.length > 0
+                data.available = true
+                data.main = names.shift()
+                if names.length == 1
+                    data.side = "and #{names[0]}"
+                else if names.length > 1
+                    data.side = "and #{names.length} other test suites"
 
-    deactivate: ->
-        console.log 'PHP Report: deactivate'
-        return
+            @trigger 'config-update', data
 
     runnerStart: ->
-        unless activeView and activeView.active
-            @toggleView
-        return unless commandRunner
-        commandRunner.start()
+        runner.start() if runner
 
     runnerStop: ->
-        return unless commandRunner
-        commandRunner.stop()
+        runner.stop() if runner
 
     testComplete: ->
-        return if commandRunner
-        resultFile = commandRunner.getResultFile()
-        if !resultFile
+        return unless runner
+        resultTest = runner.getResultFile()
+        resultCover = runner.getCoverageFile()
+        if not resultTest or not resultCover
             console.warn 'Got no result file!'
             return
 
-        console.log "Starting read of #{resultFile}"
 
-        parser = new ParserJunit(resultFile)
-        parser.getTestGroups (groups) =>
-            console.log "Reading stuff finished!"
-            console.log "Resulting groups:", groups
+        clover = new ParserClover resultCover
+        parser = new ParserJunit resultTest
+
+        clover.getCoveragePercentage (coverage) =>
+            if coverage == null then return
+            @trigger 'update-metrics', coverage: coverage
+
+        parser.getStatistics (data) =>
+            if data == null then return
+            @trigger 'update-metrics', data
 
     # Do we really need to write our own hook system?
+
     ###
     Adds an event listener to the hook specified
 
@@ -133,13 +150,14 @@ module.exports = phpReport =
     @param {Function} action Action to perform
     ###
     on: (name, action) ->
-        console.log 'Debug on!', typeof action, typeof name
-
         if typeof name != 'string' then return
         if typeof action != 'function' then return
 
-        if not @hookLinks[name] then @hookLinks[name] = []
-        @hookLinks[name].push(action)
+        # If the hook has not been used before, create an entry for it.
+        if not hooks[name] then hooks[name] = []
+
+        # Push in the new value, but only if it doesn't exist yet.
+        hooks[name].push(action) if hooks[name].indexOf action == -1
 
     ###
     Removes an action from the event listener, or removes all actions from an
@@ -152,14 +170,12 @@ module.exports = phpReport =
         if typeof name != 'string' then return
         if typeof action != 'function' and action != null then return
 
-        if action == null
-            @hookLinks[name] = []
-        else
-            newLinks = []
-            for hook in @hookLinks[name]
-                if hook != action then newLinks.push(action)
+        # If action is null, remove all elements
+        if action == null then return hooks[name] = []
 
-            @hookLinks[name] = newLinks
+        # Else, only slice one off
+        index = hooks[name].indexOf action
+        hooks[name].splice(index, 1) if index != -1
 
     ###
     Triggers a hook, won't throw an error if nothing is bound to it.
@@ -168,11 +184,15 @@ module.exports = phpReport =
     @param {Object} data Extra data to send
     ###
     trigger: (hook, data = {}) ->
-        console.log "Trigger #{hook} with #{data}."
-        if not @hookLinks[hook] then return
-        if @hookLinks[hook].length == 0 then return
+        if not hooks[hook] then return
+        if hooks[hook].length == 0 then return
 
-        event = new CustomEvent hook, detail: data, cancelable: true
-        for action in @hookLinks[hook]
-            if event.defaultPrevented then break
-            action event
+        event = new Event hook
+        for action in hooks[hook]
+            if typeof action != 'function' then return
+            try
+                action event, data
+            catch error
+                console.warn "Error on #{hook}: ", error
+                console.log "Removing broken action from #{hook}."
+                @off hook, action

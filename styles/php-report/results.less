@@ -5,3 +5,55 @@
 .php-report__results {
 
 }
+
+.php-report-result {
+    margin: 0 @component-padding;
+    padding: 0;
+
+    overflow: hidden;
+
+    &--expanded {
+        margin: @component-padding 0;
+    }
+
+    &__header {
+        order: 1;
+    }
+
+    &__details {
+        &:extend(.panel-body);
+
+        order: 2;
+
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+}
+
+.php-report-result-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    &__icon {
+        order: 1;
+
+        flex: 0 0 @component-icon-size * 2;
+        padding: @component-icon-size * .5;
+    }
+
+    &__title {
+        order: 2;
+        flex: 0 1;
+
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+
+        padding: 0 @component-padding;
+    }
+
+    &--passed {
+
+    }
+}

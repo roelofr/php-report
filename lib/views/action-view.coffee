@@ -6,7 +6,7 @@ Contains buttons that do stuff
 @author Roelof Roos (https://github.com/roelofr)
 ###
 
-{View} = require 'atom-space-pen-views'
+{View} = require 'space-pen'
 
 module.exports =
 class ActionView extends View
@@ -36,6 +36,7 @@ class ActionView extends View
 
         @btn_run.on('click', -> phpReport.runnerStart())
         @btn_kill.on('click', -> phpReport.runnerStop())
+        @btn_clear.on('click', -> phpReport.trigger 'phpunit:clean')
 
         phpReport.on('phpunit:start', => @changeButtons yes)
         phpReport.on('phpunit:stop', => @changeButtons no)

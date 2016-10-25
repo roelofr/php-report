@@ -3,25 +3,19 @@
 //
 
 .php-report__terminal {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-content: stretch;
-    align-items: stretch;
-
-    height: 300px;
-
-    overflow-y: hidden;
-    background-color: @base-border-color;
-
+    .panel-heading {
+        border-radius: 0;
+        cursor: pointer;
+    }
 
     &-inner {
+        &:extend(.padded);
+        height: 12rem;
+
         font-size: 1.3rem;
         line-height: 1.29rem;
-        color: @text-color-highlight;
-        padding: .3rem .4rem;
 
-        word-wrap: normal;
+        word-wrap: break-word;
         word-break: break-all;
     }
 }

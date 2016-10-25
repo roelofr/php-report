@@ -6,7 +6,7 @@ and code coverage.
 @author Roelof Roos (https://github.com/roelofr)
 ###
 
-{View} = require 'atom-space-pen-views'
+{View} = require 'space-pen'
 HeaderScore = require './header-score';
 
 module.exports =
@@ -24,9 +24,28 @@ class HeaderView extends View
                 @subview 'err_count', new HeaderScore('Errors', true)
                 @subview 'coverage', new HeaderScore('Coverage', false)
 
+    initialize: (phpReport) ->
+        phpReport.on 'config-update', (event, data) =>
+            @setTitle data.main
+            @setSubtitle data.side
+
+        phpReport.on 'update-metrics', (event, data) =>
+
+            if data.tests?
+                @setTestCount data.tests
+
+            if data.failures?
+                @setFailureCount data.failures
+
+            if data.errors?
+                @setErrorCount data.errors
+
+            if data.coverage?
+                @setCoveragePercentage data.coverage
+
+        phpReport.on 'phpunit:clean', => @clear()
+
     clear: ->
-        @title.html 'No title'
-        @subtitle.html ''
         @test_count.setValue '0'
         @fail_count.setValue '0'
         @err_count.setValue '0'
