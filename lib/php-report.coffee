@@ -15,7 +15,7 @@ ParserClover = require './parsers/parser-clover'
 Runner = require './runner'
 
 # Required Atom dependancies
-{CompositeDisposable} = require 'atom'
+{CompositeDisposable, Emitter} = require 'atom'
 path = require 'path'
 fs = require 'fs'
 
@@ -26,6 +26,7 @@ CMD_TOGGLE = 'php-report:toggle'
 hooks = {}
 runner = null
 view = null
+emitter = new Emitter
 
 module.exports = phpReport =
 
@@ -47,8 +48,7 @@ module.exports = phpReport =
 
     deactivate: ->
         # Release all hooks
-        for hook, _ of hooks
-            @off hook
+        emitter.clear()
 
         # Destroy runner
         runner.stop()
@@ -153,11 +153,10 @@ module.exports = phpReport =
         if typeof name != 'string' then return
         if typeof action != 'function' then return
 
-        # If the hook has not been used before, create an entry for it.
-        if not hooks[name] then hooks[name] = []
+        newAction = (data) ->
+            action null, data
 
-        # Push in the new value, but only if it doesn't exist yet.
-        hooks[name].push(action) if hooks[name].indexOf action == -1
+        emitter.on name, newAction
 
     ###
     Removes an action from the event listener, or removes all actions from an
@@ -184,15 +183,4 @@ module.exports = phpReport =
     @param {Object} data Extra data to send
     ###
     trigger: (hook, data = {}) ->
-        if not hooks[hook] then return
-        if hooks[hook].length == 0 then return
-
-        event = new Event hook
-        for action in hooks[hook]
-            if typeof action != 'function' then return
-            try
-                action event, data
-            catch error
-                console.warn "Error on #{hook}: ", error
-                console.log "Removing broken action from #{hook}."
-                @off hook, action
+        emitter.emit hook, data
