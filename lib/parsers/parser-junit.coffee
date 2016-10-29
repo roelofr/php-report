@@ -75,7 +75,7 @@ class ParserJunit extends ParserBase
             failures = 0
 
             # Find all tests
-            for metric in data.find '//testsuite'
+            for metric in data.find '/testsuites/testsuite'
                 if metric.attr('tests')?
                     tests += Number metric.attr('tests').value()
                 if metric.attr('failures')?
