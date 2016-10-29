@@ -6,7 +6,9 @@ Reads PHPUnit test results to determine the coverage percentage.
 
 path = require 'path'
 fs = require 'fs'
+
 ParserBase = require './parser-base'
+TestSuite = require '../models/junit-testsuite'
 
 module.exports =
 class ParserJunit extends ParserBase
@@ -57,10 +59,36 @@ class ParserJunit extends ParserBase
                 callback null, @resultData
 
     ###
+    Returns all test results, grouped per TestSuite.
+
+    @param {Function} callback Called with an array of TestSuite objects.
+    ###
+    getTestResults: (callback) ->
+        if typeof callback != 'function'
+            console.warn "Recieved #{typeof callback}, which is not a proper callback"
+            return false
+
+        @read (err, data) =>
+            if err != null
+                console.warn "Failed to read data:", err
+                return callback null
+
+            result = []
+
+            for suite in data.find '/testsuites/testsuite/testsuite'
+                console.log 'Handing result: ', suite
+                result.push new TestSuite suite
+
+            console.log "Processed into #{result.length} test suites."
+
+            callback result
+
+
+    ###
     Reads the test results and returns a test coverage percentage
 
-    @param {Function} callback after read has completed, gets an array
-    @return array List of suite names. Null on error
+    @param {Function} callback after read has completed, gets an array of suite
+    names (String[])
     ###
     getStatistics: (callback) ->
         if typeof callback != 'function' then return false
