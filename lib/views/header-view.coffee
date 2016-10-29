@@ -25,11 +25,11 @@ class HeaderView extends View
                 @subview 'coverage', new HeaderScore('Coverage', false)
 
     initialize: (phpReport) ->
-        phpReport.on 'config-update', (event, data) =>
+        phpReport.on 'config-update', (data) =>
             @setTitle data.main
             @setSubtitle data.side
 
-        phpReport.on 'update-metrics', (event, data) =>
+        phpReport.on 'update-metrics', (data) =>
 
             if data.tests?
                 @setTestCount data.tests
@@ -43,7 +43,7 @@ class HeaderView extends View
             if data.coverage?
                 @setCoveragePercentage data.coverage
 
-        phpReport.on 'phpunit:clean', => @clear()
+        phpReport.on 'clean', => @clear()
 
     clear: ->
         @test_count.setValue '0'

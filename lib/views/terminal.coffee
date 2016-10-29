@@ -20,8 +20,8 @@ class Terminal extends HideableView
     termContainer: null
 
     initialize: (phpReport) ->
-        phpReport.on 'phpunit:log', (_, line) => @append line
-        phpReport.on 'phpunit:clean', => @clear()
+        phpReport.on 'log', (line) => @append line
+        phpReport.on 'clean', => @clear()
 
         @panel.addClass('hidden')
         @header.on 'click', => @panel.toggleClass('hidden')

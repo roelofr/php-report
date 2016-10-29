@@ -41,7 +41,7 @@ module.exports = phpReport =
         runner = new Runner this
 
         # Bind hooks
-        @on 'phpunit:stop', => @testComplete()
+        @on 'stop', => @testComplete()
 
         # Return nothing
         return
@@ -140,6 +140,11 @@ module.exports = phpReport =
         parser.getStatistics (data) =>
             if data == null then return
             @trigger 'update-metrics', data
+
+        parser.getTestResults (data) =>
+            if data == null then return
+            console.log "Retrieved results of #{data.length} rows!"
+            @trigger 'results', data
 
     # Do we really need to write our own hook system?
 

@@ -32,7 +32,9 @@ class PhpReportView extends View
     initialize: (phpReport) ->
         @phpReport = phpReport
         @active = true
-        return
+
+        phpReport.on 'result-ready', => @showResults()
+        phpReport.on 'clear', => @clear()
 
     destroy: ->
         @active = false
@@ -47,6 +49,10 @@ class PhpReportView extends View
         @elem_result.hide()
         @elem_idle.show()
         @elem_header.clear()
+
+    showResults: ->
+        @elem_idle.hide()
+        @elem_result.show()
 
     setCommand: (command, action) ->
         @commands[command] = action

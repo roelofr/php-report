@@ -75,7 +75,7 @@ class PhpunitRunner
         console.log "Using #{tempFiles.coverage} as coverage file"
 
         # Switch buttons on terminal
-        @phpReport.trigger 'phpunit:start'
+        @phpReport.trigger 'start'
 
         if @events.start != null
             try @events.start()
@@ -93,11 +93,11 @@ class PhpunitRunner
         @phpunit = spawn exec, params, options
 
         @phpunit.stdout.on 'data', (data) =>
-            @phpReport.trigger 'phpunit:log', data
+            @phpReport.trigger 'log', data
 
         @phpunit.stderr.on 'data', (data) =>
             message = "<br><br><strong>Runtime error</strong><br><br>#{data}"
-            @phpReport.trigger 'phpunit:log', message
+            @phpReport.trigger 'log', message
 
         @phpunit.on 'close', (code, signal) =>
             # Assign new files
@@ -105,11 +105,11 @@ class PhpunitRunner
             @files.coverage = tempFiles.coverage
 
             # Switch buttons again
-            @phpReport.trigger 'phpunit:stop', exitcode: signal
+            @phpReport.trigger 'stop', exitcode: signal
 
     stop: ->
         if @phpunit.pid == null
             return
 
-        @phpReport.trigger 'phpunit:log', '<span class="text-error icon icon-circle-slash"></span>'
+        @phpReport.trigger 'log', '<span class="text-error icon icon-circle-slash"></span>'
         @phpunit.kill 'SIGTERM'

@@ -36,10 +36,10 @@ class ActionView extends View
 
         @btn_run.on('click', -> phpReport.runnerStart())
         @btn_kill.on('click', -> phpReport.runnerStop())
-        @btn_clear.on('click', -> phpReport.trigger 'phpunit:clean')
+        @btn_clear.on('click', -> phpReport.trigger 'clean')
 
-        phpReport.on('phpunit:start', => @changeButtons yes)
-        phpReport.on('phpunit:stop', => @changeButtons no)
+        phpReport.on('start', => @changeButtons yes)
+        phpReport.on('stop', => @changeButtons no)
         @changeButtons no
 
     clear: ->

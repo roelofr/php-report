@@ -18,8 +18,8 @@ class Progressbar extends View
 
 
     initialize: (phpReport) ->
-        phpReport.on('phpunit:start', => @show())
-        phpReport.on('phpunit:stop', => @hide())
+        phpReport.on('start', => @show())
+        phpReport.on('stop', => @hide())
 
     hide: ->
         @addClass 'php-report__progress--hidden'
