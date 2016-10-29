@@ -1,28 +1,27 @@
 ###
-Contains a testsuite, which contains testCases
+Contains a test suite which contains test classes
 
 @author Roelof Roos (https://github.com/roelofr)
 ###
 
 JUnitNode = require './junit-node'
-TestCase = require './junit-testcase'
+TestClass = require './junit-testclass'
 
 module.exports =
 class TestSuite extends JUnitNode
 
-    testCases: null
+    testClasses: null
 
     constructor: (node) ->
         super node
 
-        if !node.testCase then return
+        classes = []
+        for testclass in node.find 'testsuite'
+            classes.push(new TestClass testclass)
 
-        cases = [];
-        for testcase of node.children()
-            if testcase.name() == 'testcase'
-                cases.push(new TestCase(testcase, this))
+        @testClasses = classes
 
-        @testCases = cases
+        console.log this
 
-    getCases: ->
-        return @testCases
+    getClasses: ->
+        return @testClasses

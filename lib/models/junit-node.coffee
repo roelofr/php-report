@@ -6,62 +6,67 @@ suite
 @author Roelof Roos (https://github.com/roelofr)
 ###
 
+XmlElement = require 'libxmljs/lib/element'
+
 module.exports =
 class JunitNode
 
     node: null
 
     name: null
-    testCount: null
-    assertCount: null
-    failCount: null
-    errorCount: null
-    failure: null
-    error: null
+    file: null
+    time: null
+
+    count:
+        test: null
+        assert: null
+        fail: null
+        error: null
 
     constructor: (node) ->
+        unless node instanceof XmlElement and node.attr
+            throw new TypeError "Expected a XML node, got #{typeof node}"
+
+        # Assign node
         @node = node
 
-        if !node.attr
-            throw new TypeError("Expected a XML node, got #{typeof node}")
-
         # Get attributes
-        @name = node.attr('name')
-        @testCount = node.attr('tests')
-        @assertCount = node.attr('assertions')
-        @failCount = node.attr('failures')
-        @errorCount = node.attr('errors')
-        @time = node.attr('time')
+        @name = node.attr('name')?.value()
+        @file = node.attr('file')?.value()
+        @time = node.attr('time')?.value()
 
-        # Get failure, if any
-        fail = node.get('//failure')
-        if fail != null
-            @failure = node.text()
+        # Get counts
+        @count.test = node.attr('tests')?.value()
+        @count.assert = node.attr('assertions')?.value()
+        @count.fail = node.attr('failures')?.value()
+        @count.error = node.attr('errors')?.value()
 
-        err = node.get('//error')
-        if err != null
-            @error = err.text()
+    getNode: ->
+        return @node
 
     getName: ->
         return @name
 
-    getTestCount: ->
-        return @testCount
-
-    getAssertCount: ->
-        return @assertCount
-
-    getFailCount: ->
-        return @failCount
-
-    getErrorCount: ->
-        return @errorCount
+    getFile: ->
+        return @file
 
     getTime: ->
         return @time
 
-    getFailureMessage: ->
-        return @failure
+    getTestCount: ->
+        return @count.test
 
-    getErrorMessage: ->
-        return @error
+    getAssertCount: ->
+        return @count.assert
+
+    getFailCount: ->
+        return @count.fail
+
+    getErrorCount: ->
+        return @count.error
+
+    hasFailed: ->
+        return Boolean(@node.get('*[descendant::failure]') || @node.get('failure'))
+
+    hasError: ->
+        return Boolean(@node.get('*[descendant::error]') || @node.get('error'))
