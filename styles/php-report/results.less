@@ -3,14 +3,16 @@
 //
 
 .php-report__results {
+    &:extend(.padded);
 
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: @inset-panel-background-color;
 }
 
 .php-report-result {
     margin: 0 @component-padding;
     padding: 0;
-
-    overflow: hidden;
 
     &--expanded {
         margin: @component-padding 0;
@@ -55,5 +57,25 @@
 
     &--passed {
 
+    }
+}
+
+.php-report-test {
+    &--pass {
+        .octicon('check');
+
+        &::before {
+            .text(success);
+        }
+    }
+
+    &--fail {
+        .octicon('x');
+        .text(warning);
+    }
+
+    &--error {
+        .octicon('circle-slash');
+        .text(error);
     }
 }
