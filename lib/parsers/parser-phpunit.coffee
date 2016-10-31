@@ -89,7 +89,6 @@ class ParserPhpunit extends ParserBase
             # Get all suites that are supposed to run
             for suite in data.find('//testsuites/testsuite')
                 if suite.attr('name')
-                    console.log "Read #{suite.attr('name').value()}"
                     names.push(suite.attr('name').value())
 
             callback(names)

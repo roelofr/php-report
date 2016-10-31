@@ -28,9 +28,9 @@ class HeaderView extends View
         phpReport.on 'config-update', (data) =>
             if not data or typeof data != 'object' then return
 
-            if data.main? and data.main != null
+            if data.main?
                 @setTitle data.main
-            if data.side? and data.side != null
+            if data.side?
                 @setSubtitle data.side
 
         phpReport.on 'update-metrics', (data) =>

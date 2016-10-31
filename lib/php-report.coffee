@@ -105,6 +105,8 @@ module.exports = phpReport =
                 list: names,
                 available: false
 
+            console.log 'Recieved names: ', names
+
             if names.length > 0
                 data.available = true
                 data.main = names.shift()
@@ -158,10 +160,7 @@ module.exports = phpReport =
         if typeof name != 'string' then return
         if typeof action != 'function' then return
 
-        newAction = (data) ->
-            action null, data
-
-        emitter.on name, newAction
+        emitter.on name, action
 
     ###
     Removes an action from the event listener, or removes all actions from an
