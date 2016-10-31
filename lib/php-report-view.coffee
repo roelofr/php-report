@@ -55,6 +55,9 @@ class PhpReportView extends View
         @elem_result.show()
 
     setCommand: (command, action) ->
+        if typeof command != 'string' then return
+        if typeof action != 'function' then return
+
         @commands[command] = action
 
     kill: ->
@@ -70,4 +73,6 @@ class PhpReportView extends View
             @commands.close()
 
     append: (data, parse = true) ->
+        if not data? or typeof data != 'string' then return
+
         @elem_term.append data

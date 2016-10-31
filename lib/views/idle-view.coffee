@@ -47,7 +47,10 @@ class IdleView extends HideableView
         @unavailable.find('.panel-body').html(unavailableBody)
 
         phpReport.on 'config-update', (data) =>
-            @setAvailability data.available
+            if not data or typeof data != 'object' then return
+
+            if data.available?
+                @setAvailability data.available
 
     hide: ->
         @addClass 'hidden'

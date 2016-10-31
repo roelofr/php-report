@@ -45,7 +45,7 @@ class ResultView extends HideableView
         return title
 
     setResults: (results) ->
-        if not results or not results.forEach
+        if not results or instanceof results != 'object' or not results.forEach
             console.warn 'Cannot read results!', results
             return
 

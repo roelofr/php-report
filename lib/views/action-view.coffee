@@ -34,12 +34,12 @@ class ActionView extends View
     initialize: (phpReport) ->
         @reporter = phpReport
 
-        @btn_run.on('click', -> phpReport.runnerStart())
-        @btn_kill.on('click', -> phpReport.runnerStop())
-        @btn_clear.on('click', -> phpReport.trigger 'clean')
+        @btn_run.on 'click', -> phpReport.runnerStart()
+        @btn_kill.on 'click', -> phpReport.runnerStop()
+        @btn_clear.on 'click', -> phpReport.trigger 'clean'
 
-        phpReport.on('start', => @changeButtons yes)
-        phpReport.on('stop', => @changeButtons no)
+        phpReport.on 'start', => @changeButtons yes
+        phpReport.on 'stop', => @changeButtons no
         @changeButtons no
 
     clear: ->

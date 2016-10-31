@@ -31,6 +31,8 @@ class Terminal extends HideableView
         @panel.scrollTop 0
 
     append: (text) ->
+        if not text or typeof text != 'string' then return
+
         text = String(text).replace /(\r\n|\n\r|\r|\n)/g, '<br />$1'
         # Append text and scroll to end
         @terminal.append text

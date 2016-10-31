@@ -26,10 +26,15 @@ class HeaderView extends View
 
     initialize: (phpReport) ->
         phpReport.on 'config-update', (data) =>
-            @setTitle data.main
-            @setSubtitle data.side
+            if not data or typeof data != 'object' then return
+
+            if data.main? and data.main != null
+                @setTitle data.main
+            if data.side? and data.side != null
+                @setSubtitle data.side
 
         phpReport.on 'update-metrics', (data) =>
+            if not data or typeof data != 'object' then return
 
             if data.tests?
                 @setTestCount data.tests
@@ -52,27 +57,35 @@ class HeaderView extends View
         @coverage.setValue '0%'
 
     setTitle: (title) ->
+        if typeof title != 'string' then return
+
         @title.text title
 
     setSubtitle: (title) ->
+        if typeof title != 'string' then return
+
         @subtitle.text title
 
     setTestCount: (count) ->
-        if typeof count != 'number' || count < 0
+        if typeof count != 'number' or count < 0
             count = 0
+
         @test_count.updateValue Math.floor(count)
 
     setFailureCount: (failure) ->
-        if typeof failure != 'number' || failure < 0
+        if typeof failure != 'number' or failure < 0
             failure = 0
+
         @fail_count.updateValue Math.floor(failure)
 
     setErrorCount: (error) ->
-        if typeof error != 'number' || error < 0
+        if typeof error != 'number' or error < 0
             error = 0
+
         @err_count.updateValue Math.floor(error)
 
     setCoveragePercentage: (coverage) ->
-        if typeof coverage != 'number' || coverage < 0 || coverage > 100
+        if typeof coverage != 'number' or coverage < 0 or coverage > 100
             coverage = 0
+
         @coverage.updateValue "#{Math.floor coverage}%"
