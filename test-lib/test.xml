@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="240" assertions="369" failures="1" errors="3" time="2.451344">
+    <testsuite name="DJO Identity Provider" tests="240" assertions="369" failures="1" errors="3" time="2.451344">
+        <testsuite name="App\Test\Controller\Image\AppIconFilterTest" file="/home/user/dev/app/tests/controller/Image/AppIconFilterTest.php" tests="2" assertions="4" failures="0" errors="0" time="0.114952">
+        <testcase name="testResize" class="App\Test\Controller\Image\AppIconFilterTest" file="/home/user/dev/app/tests/controller/Image/AppIconFilterTest.php" line="22" assertions="2" time="0.065952"/>
+        <testcase name="testSimilarity" class="App\Test\Controller\Image\AppIconFilterTest" file="/home/user/dev/app/tests/controller/Image/AppIconFilterTest.php" line="37" assertions="2" time="0.049000"/>
+      </testsuite>
+      <testsuite name="App\Test\Controller\Image\SiteHeaderFilterTest" file="/home/user/dev/app/tests/controller/Image/SiteHeaderFilterTest.php" tests="2" assertions="4" failures="0" errors="0" time="1.078033">
+        <testcase name="testResize" class="App\Test\Controller\Image\SiteHeaderFilterTest" file="/home/user/dev/app/tests/controller/Image/SiteHeaderFilterTest.php" line="22" assertions="2" time="0.278923"/>
+        <testcase name="testSimilarity" class="App\Test\Controller\Image\SiteHeaderFilterTest" file="/home/user/dev/app/tests/controller/Image/SiteHeaderFilterTest.php" line="37" assertions="2" time="0.799110"/>
+      </testsuite>
+      <testsuite name="App\Test\Core\BackendExceptionTest" file="/home/user/dev/app/tests/core/BackendExceptionTest.php" tests="1" assertions="4" failures="0" errors="0" time="0.005936">
+        <testcase name="testValidity" class="App\Test\Core\BackendExceptionTest" file="/home/user/dev/app/tests/core/BackendExceptionTest.php" line="17" assertions="4" time="0.005936"/>
+      </testsuite>
+      <testsuite name="App\Test\Core\ConfigReaderTest" file="/home/user/dev/app/tests/core/ConfigReaderTest.php" tests="15" assertions="25" failures="0" errors="0" time="0.066603">
+        <testsuite name="App\Test\Core\ConfigReaderTest::testValidName" tests="11" assertions="11" failures="0" errors="0" time="0.042216">
+          <testcase name="testValidName with data set #0" assertions="1" time="0.003939"/>
+          <testcase name="testValidName with data set #1" assertions="1" time="0.004674"/>
+          <testcase name="testValidName with data set #2" assertions="1" time="0.003306"/>
+          <testcase name="testValidName with data set #3" assertions="1" time="0.004543"/>
+          <testcase name="testValidName with data set #4" assertions="1" time="0.003435"/>
+          <testcase name="testValidName with data set #5" assertions="1" time="0.003586"/>
+          <testcase name="testValidName with data set #6" assertions="1" time="0.003550"/>
+          <testcase name="testValidName with data set #7" assertions="1" time="0.003402"/>
+          <testcase name="testValidName with data set #8" assertions="1" time="0.003441"/>
+          <testcase name="testValidName with data set #9" assertions="1" time="0.004997"/>
+          <testcase name="testValidName with data set #10" assertions="1" time="0.003343"/>
+        </testsuite>
+        <testcase name="testConstructSimple" class="App\Test\Core\ConfigReaderTest" file="/home/user/dev/app/tests/core/ConfigReaderTest.php" line="88" assertions="4" time="0.010122"/>
+        <testcase name="testConstructSimpleExtended" class="App\Test\Core\ConfigReaderTest" file="/home/user/dev/app/tests/core/ConfigReaderTest.php" line="104" assertions="5" time="0.004807"/>
+        <testcase name="testConstructDeepExtended" class="App\Test\Core\ConfigReaderTest" file="/home/user/dev/app/tests/core/ConfigReaderTest.php" line="121" assertions="4" time="0.005791"/>
+        <testcase name="testConstructNotFound" class="App\Test\Core\ConfigReaderTest" file="/home/user/dev/app/tests/core/ConfigReaderTest.php" line="139" assertions="1" time="0.003667"/>
+      </testsuite>
+      <testsuite name="App\Test\Core\ConfigTest" file="/home/user/dev/app/tests/core/ConfigTest.php" tests="15" assertions="25" failures="0" errors="0" time="0.090365">
+        <testsuite name="App\Test\Core\ConfigTest::testValidName" tests="11" assertions="11" failures="0" errors="0" time="0.060068">
+          <testcase name="testValidName with data set #0" assertions="1" time="0.005488"/>
+          <testcase name="testValidName with data set #1" assertions="1" time="0.005250"/>
+          <testcase name="testValidName with data set #2" assertions="1" time="0.005867"/>
+          <testcase name="testValidName with data set #3" assertions="1" time="0.002990"/>
+          <testcase name="testValidName with data set #4" assertions="1" time="0.006245"/>
+          <testcase name="testValidName with data set #5" assertions="1" time="0.005582"/>
+          <testcase name="testValidName with data set #6" assertions="1" time="0.006509"/>
+          <testcase name="testValidName with data set #7" assertions="1" time="0.005376"/>
+          <testcase name="testValidName with data set #8" assertions="1" time="0.006170"/>
+          <testcase name="testValidName with data set #9" assertions="1" time="0.005509"/>
+          <testcase name="testValidName with data set #10" assertions="1" time="0.005082"/>
+        </testsuite>
+        <testcase name="testConstructSimple" class="App\Test\Core\ConfigTest" file="/home/user/dev/app/tests/core/ConfigTest.php" line="61" assertions="4" time="0.007769"/>
+        <testcase name="testConstructSimpleExtended" class="App\Test\Core\ConfigTest" file="/home/user/dev/app/tests/core/ConfigTest.php" line="78" assertions="5" time="0.006989"/>
+        <testcase name="testConstructDeepExtended" class="App\Test\Core\ConfigTest" file="/home/user/dev/app/tests/core/ConfigTest.php" line="96" assertions="4" time="0.009809"/>
+        <testcase name="testConstructNotFound" class="App\Test\Core\ConfigTest" file="/home/user/dev/app/tests/core/ConfigTest.php" line="115" assertions="1" time="0.005730"/>
+      </testsuite>
+      <testsuite name="App\Test\Core\UtilTest" file="/home/user/dev/app/tests/core/UtilTest.php" tests="12" assertions="12" failures="0" errors="0" time="0.084332">
+        <testsuite name="App\Test\Core\UtilTest::testValidatePhoneNumber" tests="6" assertions="6" failures="0" errors="0" time="0.061293">
+          <testcase name="testValidatePhoneNumber with data set &quot;Test number&quot;" assertions="1" time="0.025544"/>
+          <testcase name="testValidatePhoneNumber with data set &quot;Real number&quot;" assertions="1" time="0.012775"/>
+          <testcase name="testValidatePhoneNumber with data set &quot;Too long&quot;" assertions="1" time="0.007456"/>
+          <testcase name="testValidatePhoneNumber with data set &quot;Emergency services local&quot;" assertions="1" time="0.004732"/>
+          <testcase name="testValidatePhoneNumber with data set &quot;Emergency services&quot;" assertions="1" time="0.007194"/>
+          <testcase name="testValidatePhoneNumber with data set &quot;Empty&quot;" assertions="1" time="0.003592"/>
+        </testsuite>
+        <testsuite name="App\Test\Core\UtilTest::testValidateDate" tests="6" assertions="6" failures="0" errors="0" time="0.023040">
+          <testcase name="testValidateDate with data set &quot;Normal&quot;" assertions="1" time="0.005926"/>
+          <testcase name="testValidateDate with data set &quot;Inverse&quot;" assertions="1" time="0.003388"/>
+          <testcase name="testValidateDate with data set &quot;Underflow&quot;" assertions="1" time="0.003375"/>
+          <testcase name="testValidateDate with data set &quot;Overflow&quot;" assertions="1" time="0.003225"/>
+          <testcase name="testValidateDate with data set &quot;Invalid date&quot;" assertions="1" time="0.003125"/>
+          <testcase name="testValidateDate with data set &quot;Invalid type&quot;" assertions="1" time="0.004001"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="App\Test\Model\PersistableTest" file="/home/user/dev/app/tests/model/PersistableTest.php" tests="18" assertions="35" failures="0" errors="0" time="0.116678">
+        <testsuite name="App\Test\Model\PersistableTest::testGetById" tests="7" assertions="8" failures="0" errors="0" time="0.032752">
+          <testcase name="testGetById with data set #0" assertions="2" time="0.011983"/>
+          <testcase name="testGetById with data set #1" assertions="1" time="0.004138"/>
+          <testcase name="testGetById with data set #2" assertions="1" time="0.003298"/>
+          <testcase name="testGetById with data set #3" assertions="1" time="0.003081"/>
+          <testcase name="testGetById with data set #4" assertions="1" time="0.004050"/>
+          <testcase name="testGetById with data set #5" assertions="1" time="0.003107"/>
+          <testcase name="testGetById with data set #6" assertions="1" time="0.003095"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\PersistableTest::testGetBySearch" tests="7" assertions="13" failures="0" errors="0" time="0.047987">
+          <testcase name="testGetBySearch with data set #0" assertions="3" time="0.014237"/>
+          <testcase name="testGetBySearch with data set #1" assertions="3" time="0.007705"/>
+          <testcase name="testGetBySearch with data set #2" assertions="3" time="0.012112"/>
+          <testcase name="testGetBySearch with data set #3" assertions="1" time="0.003279"/>
+          <testcase name="testGetBySearch with data set #4" assertions="1" time="0.004069"/>
+          <testcase name="testGetBySearch with data set #5" assertions="1" time="0.003379"/>
+          <testcase name="testGetBySearch with data set #6" assertions="1" time="0.003206"/>
+        </testsuite>
+        <testcase name="testPersistValid" class="App\Test\Model\PersistableTest" file="/home/user/dev/app/tests/model/PersistableTest.php" line="182" assertions="3" time="0.009595"/>
+        <testcase name="testPersistException" class="App\Test\Model\PersistableTest" file="/home/user/dev/app/tests/model/PersistableTest.php" line="204" assertions="3" time="0.009103"/>
+        <testcase name="testPersistExisting" class="App\Test\Model\PersistableTest" file="/home/user/dev/app/tests/model/PersistableTest.php" line="224" assertions="4" time="0.010201"/>
+        <testcase name="testPersistWithInvalidCheck" class="App\Test\Model\PersistableTest" file="/home/user/dev/app/tests/model/PersistableTest.php" line="248" assertions="4" time="0.007041"/>
+      </testsuite>
+      <testsuite name="App\Test\Model\ResetTokenTest" file="/home/user/dev/app/tests/model/ResetTokenTest.php" tests="14" assertions="20" failures="0" errors="0" time="0.065726">
+        <testsuite name="App\Test\Model\ResetTokenTest::testResetToken" tests="8" assertions="8" failures="0" errors="0" time="0.030368">
+          <testcase name="testResetToken with data set #0" assertions="1" time="0.003739"/>
+          <testcase name="testResetToken with data set #1" assertions="1" time="0.003278"/>
+          <testcase name="testResetToken with data set #2" assertions="1" time="0.003306"/>
+          <testcase name="testResetToken with data set #3" assertions="1" time="0.005893"/>
+          <testcase name="testResetToken with data set #4" assertions="1" time="0.003215"/>
+          <testcase name="testResetToken with data set #5" assertions="1" time="0.004185"/>
+          <testcase name="testResetToken with data set #6" assertions="1" time="0.003528"/>
+          <testcase name="testResetToken with data set #7" assertions="1" time="0.003224"/>
+        </testsuite>
+        <testcase name="testCreateDefaultToken" class="App\Test\Model\ResetTokenTest" file="/home/user/dev/app/tests/model/ResetTokenTest.php" line="53" assertions="4" time="0.012744"/>
+        <testcase name="testUserId" class="App\Test\Model\ResetTokenTest" file="/home/user/dev/app/tests/model/ResetTokenTest.php" line="74" assertions="1" time="0.006148"/>
+        <testcase name="testToken" class="App\Test\Model\ResetTokenTest" file="/home/user/dev/app/tests/model/ResetTokenTest.php" line="87" assertions="1" time="0.003261"/>
+        <testcase name="testBirthDate" class="App\Test\Model\ResetTokenTest" file="/home/user/dev/app/tests/model/ResetTokenTest.php" line="100" assertions="1" time="0.003263"/>
+        <testcase name="testDeathDate" class="App\Test\Model\ResetTokenTest" file="/home/user/dev/app/tests/model/ResetTokenTest.php" line="113" assertions="1" time="0.006142"/>
+        <testcase name="testExpire" class="App\Test\Model\ResetTokenTest" file="/home/user/dev/app/tests/model/ResetTokenTest.php" line="127" assertions="4" time="0.003800"/>
+      </testsuite>
+      <testsuite name="App\Test\Model\SessionTest" file="/home/user/dev/app/tests/model/SessionTest.php" tests="19" assertions="20" failures="1" errors="1" time="0.077399">
+        <testcase name="testConstructorBlank" class="App\Test\Model\SessionTest" file="/home/user/dev/app/tests/model/SessionTest.php" line="25" assertions="4" time="0.006092"/>
+        <testcase name="testFailure" class="App\Test\Model\SessionTest" file="/home/user/dev/app/tests/model/SessionTest.php" line="34" assertions="0" time="0.003105">
+          <failure type="PHPUnit_Framework_AssertionFailedError">App\Test\Model\SessionTest::testFailure
+
+/home/user/dev/app/tests/model/SessionTest.php:36
+</failure>
+        </testcase>
+        <testcase name="testError" class="App\Test\Model\SessionTest" file="/home/user/dev/app/tests/model/SessionTest.php" line="39" assertions="0" time="0.003952">
+          <error type="PHPUnit_Framework_Error_Warning">App\Test\Model\SessionTest::testError
+Division by zero
+
+/home/user/dev/app/src/vendor/symfony/phpunit-bridge/DeprecationErrorHandler.php:72
+/home/user/dev/app/tests/model/SessionTest.php:41
+</error>
+        </testcase>
+        <testcase name="testConstructorUser" class="App\Test\Model\SessionTest" file="/home/user/dev/app/tests/model/SessionTest.php" line="51" assertions="1" time="0.003245"/>
+        <testcase name="testConstructorStartTime" class="App\Test\Model\SessionTest" file="/home/user/dev/app/tests/model/SessionTest.php" line="68" assertions="1" time="0.003129"/>
+        <testcase name="testConstructorSource" class="App\Test\Model\SessionTest" file="/home/user/dev/app/tests/model/SessionTest.php" line="86" assertions="1" time="0.005484"/>
+        <testsuite name="App\Test\Model\SessionTest::testUserId" tests="7" assertions="7" failures="0" errors="0" time="0.025952">
+          <testcase name="testUserId with data set #0" assertions="1" time="0.003106"/>
+          <testcase name="testUserId with data set #1" assertions="1" time="0.003857"/>
+          <testcase name="testUserId with data set #2" assertions="1" time="0.003263"/>
+          <testcase name="testUserId with data set #3" assertions="1" time="0.003270"/>
+          <testcase name="testUserId with data set #4" assertions="1" time="0.005693"/>
+          <testcase name="testUserId with data set #5" assertions="1" time="0.003206"/>
+          <testcase name="testUserId with data set #6" assertions="1" time="0.003557"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\SessionTest::testSource" tests="6" assertions="6" failures="0" errors="0" time="0.026440">
+          <testcase name="testSource with data set #0" assertions="1" time="0.003369"/>
+          <testcase name="testSource with data set #1" assertions="1" time="0.003117"/>
+          <testcase name="testSource with data set #2" assertions="1" time="0.007188"/>
+          <testcase name="testSource with data set #3" assertions="1" time="0.003395"/>
+          <testcase name="testSource with data set #4" assertions="1" time="0.006130"/>
+          <testcase name="testSource with data set #5" assertions="1" time="0.003241"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="App\Test\Model\EmailTraitTest" file="/home/user/dev/app/tests/model/User/EmailTraitTest.php" tests="20" assertions="27" failures="0" errors="2" time="0.151369">
+        <testsuite name="App\Test\Model\EmailTraitTest::testEmail" tests="10" assertions="12" failures="0" errors="1" time="0.086571">
+          <testcase name="testEmail with data set &quot;Simple&quot;" assertions="2" time="0.009655"/>
+          <testcase name="testEmail with data set &quot;Mixed&quot;" assertions="2" time="0.008183"/>
+          <testcase name="testEmail with data set &quot;Complex&quot;" assertions="2" time="0.008807"/>
+          <testcase name="testEmail with data set &quot;Empty&quot;" assertions="1" time="0.009796"/>
+          <testcase name="testEmail with data set &quot;Spaces&quot;" assertions="1" time="0.010517"/>
+          <testcase name="testEmail with data set &quot;Null&quot;" assertions="1" time="0.010868"/>
+          <testcase name="testEmail with data set &quot;Invalid&quot;" assertions="0" time="0.009237">
+            <error type="PHPUnit_Framework_ExceptionWrapper">App\Test\Model\EmailTraitTest::testEmail with data set "Invalid" ('mail@mail', true)
+TypeError: Expected one of email, got string
+
+/home/user/dev/app/src/core/Util.php:142
+/home/user/dev/app/src/model/User/EmailTrait.php:48
+/home/user/dev/app/tests/model/User/EmailTraitTest.php:44
+</error>
+          </testcase>
+          <testcase name="testEmail with data set &quot;Extra dot&quot;" assertions="1" time="0.006201"/>
+          <testcase name="testEmail with data set &quot;No at-sign&quot;" assertions="1" time="0.006460"/>
+          <testcase name="testEmail with data set &quot;Wrong type&quot;" assertions="1" time="0.006847"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\EmailTraitTest::testEmailParents" tests="10" assertions="15" failures="0" errors="1" time="0.064797">
+          <testcase name="testEmailParents with data set &quot;Simple&quot;" assertions="2" time="0.005014"/>
+          <testcase name="testEmailParents with data set &quot;Mixed&quot;" assertions="2" time="0.008621"/>
+          <testcase name="testEmailParents with data set &quot;Complex&quot;" assertions="2" time="0.009034"/>
+          <testcase name="testEmailParents with data set &quot;Empty&quot;" assertions="2" time="0.005025"/>
+          <testcase name="testEmailParents with data set &quot;Spaces&quot;" assertions="2" time="0.008378"/>
+          <testcase name="testEmailParents with data set &quot;Null&quot;" assertions="2" time="0.005001"/>
+          <testcase name="testEmailParents with data set &quot;Invalid&quot;" assertions="0" time="0.007468">
+            <error type="PHPUnit_Framework_ExceptionWrapper">App\Test\Model\EmailTraitTest::testEmailParents with data set "Invalid" ('mail@mail', true)
+InvalidArgumentException: "mail@mail" is not a valid e-mail address
+
+/home/user/dev/app/src/model/User/EmailTrait.php:69
+/home/user/dev/app/tests/model/User/EmailTraitTest.php:85
+</error>
+          </testcase>
+          <testcase name="testEmailParents with data set &quot;Extra dot&quot;" assertions="1" time="0.005094"/>
+          <testcase name="testEmailParents with data set &quot;No at-sign&quot;" assertions="1" time="0.005106"/>
+          <testcase name="testEmailParents with data set &quot;Wrong type&quot;" assertions="1" time="0.006056"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="App\Test\Model\PasswordTraitTest" file="/home/user/dev/app/tests/model/User/PasswordTraitTest.php" tests="0" assertions="0" failures="0" errors="0" time="0.000000">
+        <testsuite name="App\Test\Model\PasswordTraitTest::testPassword" tests="0" assertions="0" failures="0" errors="0" time="0.000000"/>
+        <testsuite name="App\Test\Model\PasswordTraitTest::testCheckPassword" tests="0" assertions="0" failures="0" errors="0" time="0.000000"/>
+      </testsuite>
+      <testsuite name="App\Test\Model\PhoneTraitTest" file="/home/user/dev/app/tests/model/User/PhoneTraitTest.php" tests="16" assertions="24" failures="0" errors="0" time="0.129314">
+        <testsuite name="App\Test\Model\PhoneTraitTest::testPhoneNumber" tests="8" assertions="12" failures="0" errors="0" time="0.067789">
+          <testcase name="testPhoneNumber with data set &quot;Valid local&quot;" assertions="2" time="0.011202"/>
+          <testcase name="testPhoneNumber with data set &quot;Valid intl&quot;" assertions="2" time="0.009419"/>
+          <testcase name="testPhoneNumber with data set &quot;Empty&quot;" assertions="2" time="0.005185"/>
+          <testcase name="testPhoneNumber with data set &quot;Spaces&quot;" assertions="2" time="0.008742"/>
+          <testcase name="testPhoneNumber with data set &quot;Null&quot;" assertions="1" time="0.006161"/>
+          <testcase name="testPhoneNumber with data set &quot;Invalid&quot;" assertions="1" time="0.008465"/>
+          <testcase name="testPhoneNumber with data set &quot;Emergency&quot;" assertions="1" time="0.010791"/>
+          <testcase name="testPhoneNumber with data set &quot;Number&quot;" assertions="1" time="0.007824"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\PhoneTraitTest::testCellNumber" tests="8" assertions="12" failures="0" errors="0" time="0.061525">
+          <testcase name="testCellNumber with data set &quot;Valid local&quot;" assertions="2" time="0.010304"/>
+          <testcase name="testCellNumber with data set &quot;Valid intl&quot;" assertions="2" time="0.006951"/>
+          <testcase name="testCellNumber with data set &quot;Empty&quot;" assertions="2" time="0.005334"/>
+          <testcase name="testCellNumber with data set &quot;Spaces&quot;" assertions="2" time="0.008285"/>
+          <testcase name="testCellNumber with data set &quot;Null&quot;" assertions="1" time="0.004998"/>
+          <testcase name="testCellNumber with data set &quot;Invalid&quot;" assertions="1" time="0.009448"/>
+          <testcase name="testCellNumber with data set &quot;Emergency&quot;" assertions="1" time="0.010639"/>
+          <testcase name="testCellNumber with data set &quot;Number&quot;" assertions="1" time="0.005566"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" tests="106" assertions="169" failures="0" errors="0" time="0.470637">
+        <testcase name="testGetByIdValid" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="37" assertions="1" time="0.003734"/>
+        <testcase name="testGetByIdInvalid" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="45" assertions="1" time="0.003373"/>
+        <testcase name="testGetByUserId" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="54" assertions="2" time="0.003533"/>
+        <testcase name="testGetByEmailInvalidType" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="63" assertions="1" time="0.003874"/>
+        <testcase name="testGetByEmailInvalidMail" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="72" assertions="1" time="0.003752"/>
+        <testcase name="testGetByBackendIdValid" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="98" assertions="2" time="0.009639"/>
+        <testcase name="testGetByBackendIdFloat" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="108" assertions="1" time="0.003231"/>
+        <testcase name="testConstructorBlank" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="117" assertions="1" time="0.003284"/>
+        <testsuite name="App\Test\Model\UserTest::testAccountType" tests="9" assertions="17" failures="0" errors="0" time="0.038200">
+          <testcase name="testAccountType with data set &quot;Simple&quot;" assertions="2" time="0.005660"/>
+          <testcase name="testAccountType with data set &quot;Double&quot;" assertions="2" time="0.003652"/>
+          <testcase name="testAccountType with data set &quot;Filtered&quot;" assertions="2" time="0.005549"/>
+          <testcase name="testAccountType with data set &quot;Caps&quot;" assertions="2" time="0.003640"/>
+          <testcase name="testAccountType with data set &quot;Empty&quot;" assertions="2" time="0.003689"/>
+          <testcase name="testAccountType with data set &quot;Spaces&quot;" assertions="2" time="0.003768"/>
+          <testcase name="testAccountType with data set &quot;Empty items&quot;" assertions="2" time="0.003519"/>
+          <testcase name="testAccountType with data set &quot;Null&quot;" assertions="2" time="0.005200"/>
+          <testcase name="testAccountType with data set &quot;False&quot;" assertions="1" time="0.003523"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testBackendId" tests="7" assertions="10" failures="0" errors="0" time="0.035963">
+          <testcase name="testBackendId with data set #0" assertions="2" time="0.003469"/>
+          <testcase name="testBackendId with data set #1" assertions="2" time="0.005955"/>
+          <testcase name="testBackendId with data set #2" assertions="2" time="0.003418"/>
+          <testcase name="testBackendId with data set #3" assertions="1" time="0.004009"/>
+          <testcase name="testBackendId with data set #4" assertions="1" time="0.006148"/>
+          <testcase name="testBackendId with data set #5" assertions="1" time="0.007106"/>
+          <testcase name="testBackendId with data set #6" assertions="1" time="0.005858"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testFirstName" tests="8" assertions="11" failures="0" errors="0" time="0.048270">
+          <testcase name="testFirstName with data set #0" assertions="2" time="0.005870"/>
+          <testcase name="testFirstName with data set #1" assertions="2" time="0.009271"/>
+          <testcase name="testFirstName with data set #2" assertions="2" time="0.005916"/>
+          <testcase name="testFirstName with data set #3" assertions="1" time="0.005578"/>
+          <testcase name="testFirstName with data set #4" assertions="1" time="0.007315"/>
+          <testcase name="testFirstName with data set #5" assertions="1" time="0.005151"/>
+          <testcase name="testFirstName with data set #6" assertions="1" time="0.005825"/>
+          <testcase name="testFirstName with data set #7" assertions="1" time="0.003344"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testLastName" tests="8" assertions="11" failures="0" errors="0" time="0.034969">
+          <testcase name="testLastName with data set #0" assertions="2" time="0.006521"/>
+          <testcase name="testLastName with data set #1" assertions="2" time="0.003421"/>
+          <testcase name="testLastName with data set #2" assertions="2" time="0.004892"/>
+          <testcase name="testLastName with data set #3" assertions="1" time="0.003446"/>
+          <testcase name="testLastName with data set #4" assertions="1" time="0.003496"/>
+          <testcase name="testLastName with data set #5" assertions="1" time="0.005847"/>
+          <testcase name="testLastName with data set #6" assertions="1" time="0.003299"/>
+          <testcase name="testLastName with data set #7" assertions="1" time="0.004047"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testAddress" tests="6" assertions="10" failures="0" errors="0" time="0.021406">
+          <testcase name="testAddress with data set &quot;Valid&quot;" assertions="2" time="0.003661"/>
+          <testcase name="testAddress with data set &quot;Long&quot;" assertions="2" time="0.003861"/>
+          <testcase name="testAddress with data set &quot;Empty&quot;" assertions="2" time="0.003379"/>
+          <testcase name="testAddress with data set &quot;Spaces&quot;" assertions="2" time="0.003504"/>
+          <testcase name="testAddress with data set &quot;Null&quot;" assertions="1" time="0.003768"/>
+          <testcase name="testAddress with data set &quot;Wrong type&quot;" assertions="1" time="0.003233"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testZip" tests="8" assertions="12" failures="0" errors="0" time="0.034429">
+          <testcase name="testZip with data set #0" assertions="2" time="0.006960"/>
+          <testcase name="testZip with data set #1" assertions="2" time="0.003968"/>
+          <testcase name="testZip with data set #2" assertions="2" time="0.003658"/>
+          <testcase name="testZip with data set #3" assertions="2" time="0.003887"/>
+          <testcase name="testZip with data set #4" assertions="1" time="0.003948"/>
+          <testcase name="testZip with data set #5" assertions="1" time="0.003978"/>
+          <testcase name="testZip with data set #6" assertions="1" time="0.004820"/>
+          <testcase name="testZip with data set #7" assertions="1" time="0.003210"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testCity" tests="8" assertions="13" failures="0" errors="0" time="0.032481">
+          <testcase name="testCity with data set #0" assertions="2" time="0.003567"/>
+          <testcase name="testCity with data set #1" assertions="2" time="0.003500"/>
+          <testcase name="testCity with data set #2" assertions="2" time="0.003411"/>
+          <testcase name="testCity with data set #3" assertions="2" time="0.006303"/>
+          <testcase name="testCity with data set #4" assertions="2" time="0.003498"/>
+          <testcase name="testCity with data set #5" assertions="1" time="0.003890"/>
+          <testcase name="testCity with data set #6" assertions="1" time="0.004999"/>
+          <testcase name="testCity with data set #7" assertions="1" time="0.003313"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testDateOfBirth" tests="12" assertions="20" failures="0" errors="0" time="0.053710">
+          <testcase name="testDateOfBirth with data set &quot;Recent&quot;" assertions="2" time="0.006381"/>
+          <testcase name="testDateOfBirth with data set &quot;Backwards&quot;" assertions="2" time="0.003553"/>
+          <testcase name="testDateOfBirth with data set &quot;Long ago&quot;" assertions="2" time="0.004076"/>
+          <testcase name="testDateOfBirth with data set &quot;Future&quot;" assertions="2" time="0.006103"/>
+          <testcase name="testDateOfBirth with data set &quot;Leap day&quot;" assertions="2" time="0.005560"/>
+          <testcase name="testDateOfBirth with data set &quot;Invalid leap day&quot;" assertions="2" time="0.003483"/>
+          <testcase name="testDateOfBirth with data set &quot;Empty&quot;" assertions="2" time="0.006155"/>
+          <testcase name="testDateOfBirth with data set &quot;Spaces&quot;" assertions="2" time="0.003450"/>
+          <testcase name="testDateOfBirth with data set &quot;Too far ago&quot;" assertions="1" time="0.004361"/>
+          <testcase name="testDateOfBirth with data set &quot;Null&quot;" assertions="1" time="0.003475"/>
+          <testcase name="testDateOfBirth with data set &quot;DateTime object&quot;" assertions="1" time="0.003751"/>
+          <testcase name="testDateOfBirth with data set &quot;False&quot;" assertions="1" time="0.003361"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testStartDate" tests="12" assertions="20" failures="0" errors="0" time="0.050332">
+          <testcase name="testStartDate with data set &quot;Recent&quot;" assertions="2" time="0.003477"/>
+          <testcase name="testStartDate with data set &quot;Backwards&quot;" assertions="2" time="0.005471"/>
+          <testcase name="testStartDate with data set &quot;Long ago&quot;" assertions="2" time="0.003638"/>
+          <testcase name="testStartDate with data set &quot;Future&quot;" assertions="2" time="0.003563"/>
+          <testcase name="testStartDate with data set &quot;Leap day&quot;" assertions="2" time="0.005639"/>
+          <testcase name="testStartDate with data set &quot;Invalid leap day&quot;" assertions="2" time="0.003533"/>
+          <testcase name="testStartDate with data set &quot;Empty&quot;" assertions="2" time="0.005170"/>
+          <testcase name="testStartDate with data set &quot;Spaces&quot;" assertions="2" time="0.003415"/>
+          <testcase name="testStartDate with data set &quot;Too far ago&quot;" assertions="1" time="0.004390"/>
+          <testcase name="testStartDate with data set &quot;Null&quot;" assertions="1" time="0.003454"/>
+          <testcase name="testStartDate with data set &quot;DateTime object&quot;" assertions="1" time="0.003469"/>
+          <testcase name="testStartDate with data set &quot;False&quot;" assertions="1" time="0.005113"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testEndDate" tests="12" assertions="20" failures="0" errors="0" time="0.050082">
+          <testcase name="testEndDate with data set &quot;Recent&quot;" assertions="2" time="0.003457"/>
+          <testcase name="testEndDate with data set &quot;Backwards&quot;" assertions="2" time="0.006541"/>
+          <testcase name="testEndDate with data set &quot;Long ago&quot;" assertions="2" time="0.004101"/>
+          <testcase name="testEndDate with data set &quot;Future&quot;" assertions="2" time="0.006419"/>
+          <testcase name="testEndDate with data set &quot;Leap day&quot;" assertions="2" time="0.003929"/>
+          <testcase name="testEndDate with data set &quot;Invalid leap day&quot;" assertions="2" time="0.004720"/>
+          <testcase name="testEndDate with data set &quot;Empty&quot;" assertions="2" time="0.003544"/>
+          <testcase name="testEndDate with data set &quot;Spaces&quot;" assertions="2" time="0.003631"/>
+          <testcase name="testEndDate with data set &quot;Too far ago&quot;" assertions="1" time="0.003379"/>
+          <testcase name="testEndDate with data set &quot;Null&quot;" assertions="1" time="0.003715"/>
+          <testcase name="testEndDate with data set &quot;DateTime object&quot;" assertions="1" time="0.003345"/>
+          <testcase name="testEndDate with data set &quot;False&quot;" assertions="1" time="0.003301"/>
+        </testsuite>
+        <testsuite name="App\Test\Model\UserTest::testLastUpdate" tests="6" assertions="8" failures="0" errors="0" time="0.023451">
+          <testcase name="testLastUpdate with data set &quot;ISO8601&quot;" assertions="2" time="0.004738"/>
+          <testcase name="testLastUpdate with data set &quot;DateTime object&quot;" assertions="2" time="0.003543"/>
+          <testcase name="testLastUpdate with data set &quot;Future&quot;" assertions="1" time="0.003706"/>
+          <testcase name="testLastUpdate with data set &quot;Invalid&quot;" assertions="1" time="0.003536"/>
+          <testcase name="testLastUpdate with data set &quot;Null&quot;" assertions="1" time="0.003375"/>
+          <testcase name="testLastUpdate with data set &quot;Unix timestamp&quot;" assertions="1" time="0.004553"/>
+        </testsuite>
+        <testcase name="testValidPersist" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="483" assertions="3" time="0.007263"/>
+        <testcase name="testInvalidPersist" class="App\Test\Model\UserTest" file="/home/user/dev/app/tests/model/UserTest.php" line="511" assertions="4" time="0.005661"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
